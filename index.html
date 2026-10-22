@@ -1,0 +1,399 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'sha256-8tkcVtgPcymtL8ZJS7K+f/PHJOgRh1WAhRhRJE+a3lw=' 'sha256-D+dRwYpsX3T4p2Zb8LcsOyF4eMrqR+DyXIyOcAKGiUM=' 'sha256-9XXUTuQxOA2pVVm4UhY90eNuYfoRyxbgc4ZW1gIIALg='; style-src 'sha256-PfQom5/PK/306hUyAEAO99/OQCy94V0ZMWTRwzfAp5Y='; connect-src 'none'; object-src 'none'; base-uri 'none'; form-action 'none'">
+  <title>물품대조 · 일치/불일치 및 품명별 취합</title>
+  <style>:root{font-family:"Malgun Gothic","Apple SD Gothic Neo",system-ui,sans-serif;color:#202c2a;background:#f5f7f6;font-synthesis:none}*{box-sizing:border-box}body{margin:0}button,select,input{font:inherit}button{cursor:pointer}button:disabled{cursor:not-allowed;opacity:.5}a{color:#07655b;text-underline-offset:3px}[hidden]{display:none!important}.app-shell{min-height:100vh}.topbar{height:70px;background:#fff;border-bottom:1px solid #e6ebea;display:flex;align-items:center;justify-content:space-between;padding:0 max(32px,calc((100vw - 1120px)/2));gap:16px}.brand{display:flex;align-items:center;gap:12px;font-size:14px;font-weight:750;color:#263d39;white-space:nowrap}.brand-icon{display:grid;place-items:center;background:#07584f;color:white;width:30px;height:30px;border-radius:8px;font-size:23px;line-height:1}.brand-divider{color:#c7d0cd;margin:0 5px}.offline-badge{border:1px solid #cce9dc;border-radius:100px;color:#217853;background:#f3faf5;font-size:12px;font-weight:700;padding:8px 12px;white-space:nowrap}.dot{display:inline-block;width:7px;height:7px;background:#43ae73;border-radius:50%;margin-right:4px}main{max-width:1120px;margin:auto;padding:34px 28px 65px}.hero{position:relative;overflow:hidden;background:#0a514b;border-radius:20px;color:#fff;padding:48px 55px 43px;box-shadow:0 14px 30px rgba(8,66,60,.1)}.hero:after{content:"";position:absolute;right:-90px;top:-170px;width:480px;height:480px;border:1px solid rgba(205,248,228,.17);border-radius:50%;box-shadow:0 0 0 58px rgba(255,255,255,.035),0 0 0 115px rgba(255,255,255,.025);pointer-events:none}.eyebrow{display:flex;align-items:center;gap:14px;font-size:11px;letter-spacing:.14em;font-weight:750;color:#a4dbbd}.eyebrow span{letter-spacing:0;color:#78b8a1;border-left:1px solid #609990;padding-left:14px}h1{font-size:clamp(28px,3.4vw,42px);letter-spacing:-.048em;line-height:1.34;margin:26px 0 16px}h1 em{font-style:normal;color:#b4edc6}.hero p{font-size:14px;line-height:1.85;color:#d4e8e2;margin:0}.hero-note{display:inline-block;margin-top:31px;border:1px solid rgba(214,243,231,.23);background:rgba(255,255,255,.065);border-radius:7px;color:#d2e9e2;padding:11px 15px;font-size:12px;line-height:1.65;max-width:720px}.work-area,.results{margin-top:46px}.section-heading{display:flex;align-items:flex-start;gap:17px;margin-bottom:22px}.step{display:grid;place-items:center;min-width:31px;height:31px;border-radius:8px;background:#dfefe8;color:#08715b;font-size:12px;font-weight:800}.section-heading h2{font-size:21px;letter-spacing:-.04em;margin:1px 0 5px}.section-heading p{font-size:13px;color:#73817d;margin:0;line-height:1.65}.section-heading p strong{color:#4a5a56}.file-grid{display:grid;grid-template-columns:1fr 1fr;gap:17px}.file-card{position:relative;cursor:pointer;display:flex;flex-direction:column;min-height:187px;border:1px solid #dce5e1;border-radius:13px;background:#fff;padding:22px 23px;transition:border-color .16s,box-shadow .16s}.file-card:hover,.file-card:focus-within,.file-card.selected{border-color:#2b9a7b;box-shadow:0 0 0 3px #e2f4eb}.file-card-number{font-size:11px;color:#218269;font-weight:800}.file-card-title{font-size:18px;font-weight:800;margin-top:12px;letter-spacing:-.04em}.file-card-help{font-size:12px;color:#85908c;margin-top:4px}.file-picker{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-top:auto;padding-top:21px;font-size:12px;color:#7c8985;min-width:0}.file-picker>span:first-child{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.picker-action{color:#06715e;font-weight:800;white-space:nowrap}.file-card input{position:absolute;inset:0;width:100%;height:100%;opacity:0;cursor:pointer}.controls{display:flex;align-items:end;justify-content:space-between;gap:20px;margin-top:20px}.controls label{display:flex;flex-direction:column;gap:7px;font-size:12px;color:#667773;font-weight:650}.controls select{min-width:227px;background:#fff;color:#2a3835;border:1px solid #d5ded9;border-radius:8px;padding:10px 11px;font-size:13px}.actions{display:flex;align-items:center;gap:16px}.text-button{border:0;background:transparent;color:#75837d;font-size:13px;padding:10px}.text-button:hover{color:#185b4f}.primary-button{background:#08745d;border:1px solid #08745d;border-radius:9px;color:#fff;padding:12px 20px;font-size:13px;font-weight:800;min-width:167px;box-shadow:0 6px 12px rgba(5,105,81,.13)}.primary-button:hover:not(:disabled){background:#075f4e}.primary-button span{margin-left:16px}.sample-note{background:#ecf5ef;color:#496b59;border-radius:9px;padding:13px 17px;margin-top:21px;font-size:12px;line-height:1.7}.sample-note strong{font-weight:650}.sample-note a{font-weight:750}.message,.warning{margin-top:18px;padding:14px 17px;border-radius:8px;background:#fff3ed;border:1px solid #ffd9c5;color:#9b4c28;font-size:13px;line-height:1.6}.metrics{display:grid;grid-template-columns:repeat(5,1fr);gap:12px;margin-bottom:22px}.metric{background:#fff;border:1px solid #e1e8e4;border-radius:11px;padding:17px 18px;min-height:95px}.metric span{display:block;color:#7c8984;font-size:12px;margin-bottom:11px}.metric strong{font-size:24px;line-height:1;color:#2d3835}.metric.highlighted{background:#e7f4ed;border-color:#c8e6d4}.metric.highlighted strong{color:#087358}.panel{background:#fff;border:1px solid #e1e8e4;border-radius:12px;margin-top:17px;overflow:hidden}.panel-head{display:flex;align-items:center;justify-content:space-between;gap:15px;padding:20px 22px}.panel-head h3{font-size:16px;margin:0 0 5px;letter-spacing:-.03em}.panel-head p{font-size:12px;color:#86928e;margin:0;line-height:1.5}.outline-button{border:1px solid #c8ded3;border-radius:7px;background:#fff;color:#0d6b53;padding:9px 13px;white-space:nowrap;font-weight:750;font-size:12px}.outline-button:hover:not(:disabled){background:#f3faf6}.table-scroll{width:100%;overflow-x:auto}table{width:100%;border-collapse:collapse;text-align:left;white-space:nowrap;font-size:12px}thead{background:#f7f9f7}th{font-weight:700;color:#687873;padding:13px 17px;border-top:1px solid #e9eeea;border-bottom:1px solid #e9eeea}td{padding:14px 17px;border-bottom:1px solid #edf0ed;color:#35443f}tr:last-child td{border-bottom:0}.mono{font-family:Consolas,monospace;font-weight:700}.type-tag{display:inline-block;margin:2px 4px 2px 0;border-radius:5px;background:#fff2e8;color:#a3552e;padding:5px 7px;font-size:11px;font-weight:700}.empty-result{border-top:1px solid #edf0ed;text-align:center;padding:25px;color:#718079;font-size:13px;margin:0}.bottom-note{display:flex;align-items:start;gap:13px;margin-top:35px;padding:20px;background:#edf1ef;border-radius:10px;color:#687971}.bottom-note p{margin:0;font-size:12px;line-height:1.8}.bottom-note strong{color:#3e514a}.note-icon{display:grid;place-items:center;width:19px;height:19px;border:1px solid #899c94;border-radius:50%;font:700 12px Georgia,serif;flex:none;margin-top:2px}footer{max-width:1120px;margin:auto;padding:0 28px 30px;color:#9ba8a2;font-size:11px}footer span{margin:0 5px}@media(max-width:750px){.topbar{padding:0 20px;height:62px}.brand{font-size:12px}.offline-badge{font-size:10px;padding:7px}main{padding:19px 16px 45px}.hero{padding:32px 25px}.hero:after{right:-240px}.hero-note{margin-top:23px}.file-grid{grid-template-columns:1fr}.file-card{min-height:160px}.controls{align-items:stretch;flex-direction:column}.controls label,.controls select{width:100%}.actions{justify-content:flex-end}.metrics{grid-template-columns:repeat(2,1fr)}.panel-head{align-items:flex-start;flex-direction:column}.results,.work-area{margin-top:35px}footer{padding:0 16px 25px}}@media(max-width:400px){.offline-badge{display:none}.metrics{gap:8px}.metric{padding:15px}.metric strong{font-size:20px}}@media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important;transition:none!important}}
+</style>
+  </head>
+<body>
+<div class="app-shell">
+  <header class="topbar"><div class="brand"><span class="brand-icon">≡</span>업무도구 / 물품관리 · 확장판</div><span class="offline-badge">● 오프라인 · 기기 내 처리</span></header>
+  <main>
+    <section class="hero"><div class="eyebrow">INVENTORY RECONCILIATION / 확장판</div><h1>일치부터 차이까지,<br><em>품명별 수량도 한 번에.</em></h1><p>일치 목록, 불일치 목록, 품명별 합계를 순서대로 확인하세요.<br>외부 전송 없이 브라우저 안에서 처리하며 원본은 변경하지 않습니다.</p><div class="hero-note">실제 자료 사용은 기관 승인 후 진행하세요. 대장 정정·불용 판단은 담당자가 확인합니다.</div></section>
+    <section class="work-area" aria-label="입력 자료">
+      <div class="section-heading"><span class="step">01</span><div><h2>비교할 CSV 선택</h2><p>필수 열: 관리번호, 품명, 수량, 보관장소 / 열 순서는 무관합니다.</p></div></div>
+      <div class="file-grid">
+        <label class="file-card"><span class="file-card-number">A · 기준 자료</span><span class="file-card-title">물품대장</span><span id="ledgerName" class="file-card-help">CSV 파일을 선택하세요</span><span class="file-picker">파일 찾기 ↗</span><input id="ledgerFile" type="file" accept=".csv" aria-label="물품대장 CSV 선택"></label>
+        <label class="file-card"><span class="file-card-number">B · 확인 자료</span><span class="file-card-title">재물조사표</span><span id="surveyName" class="file-card-help">CSV 파일을 선택하세요</span><span class="file-picker">파일 찾기 ↗</span><input id="surveyFile" type="file" accept=".csv" aria-label="재물조사표 CSV 선택"></label>
+      </div>
+      <div class="controls"><label>인코딩<select id="encoding"><option value="utf-8">UTF-8 (기본)</option><option value="euc-kr">한국어 CP949 / EUC-KR</option></select></label><div class="actions"><button type="button" id="clearButton" class="text-button">초기화</button><button type="button" id="compareButton" class="primary-button">비교 및 취합 →</button></div></div>
+      <div class="sample-note">200개 테스트 샘플: <a href="data:text/csv;charset=utf-8;base64,77u/6rSA66as67KI7Zi4LO2SiOuqhSzsiJjrn4ks67O06rSA7J6l7IaMDQowMDAwMDEs7LGF7IOBLDEs7Jq07JiB7IKs66y07IukDQowMDAwMDIs7J2Y7J6QLDIs6rCV7J2Y7IukIDEwMe2YuA0KMDAwMDAzLOuNsOyKpO2BrO2Gsey7tO2TqO2EsCwzLOqwleydmOyLpCAxMDLtmLgNCjAwMDAwNCzrhbjtirjrtoEsNCzqsJXsnZjsi6QgMjAx7Zi4DQowMDAwMDUs7LqQ67mE64ubLDUs6rCV7J2Y7IukIDIwMu2YuA0KMDAwMDA2LOyKpO2UvOy7pCw2LOyghOyCsOqwleydmOyLpA0KMDAwMDA3LOyxheyepSw3LOyatOyYgeyCrOustOyLpA0KMDAwMDA4LOuqqOuLiO2EsCw4LOqwleydmOyLpCAxMDHtmLgNCjAwMDAwOSztlITrprDthLAsOSzqsJXsnZjsi6QgMTAy7Zi4DQowMDAwMTAs7LGF7IOBLDEwLOqwleydmOyLpCAyMDHtmLgNCjAwMDAxMSzsnZjsnpAsMSzqsJXsnZjsi6QgMjAy7Zi4DQowMDAwMTIs642w7Iqk7YGs7Yax7Lu07ZOo7YSwLDIs7KCE7IKw6rCV7J2Y7IukDQowMDAwMTMs64W47Yq467aBLDMs7Jq07JiB7IKs66y07IukDQowMDAwMTQs7LqQ67mE64ubLDQs6rCV7J2Y7IukIDEwMe2YuA0KMDAwMDE1LOyKpO2UvOy7pCw1LOqwleydmOyLpCAxMDLtmLgNCjAwMDAxNizssYXsnqUsNizqsJXsnZjsi6QgMjAx7Zi4DQowMDAwMTcs66qo64uI7YSwLDcs6rCV7J2Y7IukIDIwMu2YuA0KMDAwMDE4LO2UhOumsO2EsCw4LOyghOyCsOqwleydmOyLpA0KMDAwMDE5LOyxheyDgSw5LOyatOyYgeyCrOustOyLpA0KMDAwMDIwLOydmOyekCwxMCzqsJXsnZjsi6QgMTAx7Zi4DQowMDAwMjEs642w7Iqk7YGs7Yax7Lu07ZOo7YSwLDEs6rCV7J2Y7IukIDEwMu2YuA0KMDAwMDIyLOuFuO2KuOu2gSwyLOqwleydmOyLpCAyMDHtmLgNCjAwMDAyMyzsupDruYTri5ssMyzqsJXsnZjsi6QgMjAy7Zi4DQowMDAwMjQs7Iqk7ZS87LukLDQs7KCE7IKw6rCV7J2Y7IukDQowMDAwMjUs7LGF7J6lLDUs7Jq07JiB7IKs66y07IukDQowMDAwMjYs66qo64uI7YSwLDYs6rCV7J2Y7IukIDEwMe2YuA0KMDAwMDI3LO2UhOumsO2EsCw3LOqwleydmOyLpCAxMDLtmLgNCjAwMDAyOCzssYXsg4EsOCzqsJXsnZjsi6QgMjAx7Zi4DQowMDAwMjks7J2Y7J6QLDks6rCV7J2Y7IukIDIwMu2YuA0KMDAwMDMwLOuNsOyKpO2BrO2Gsey7tO2TqO2EsCwxMCzsoITsgrDqsJXsnZjsi6QNCjAwMDAzMSzrhbjtirjrtoEsMSzsmrTsmIHsgqzrrLTsi6QNCjAwMDAzMizsupDruYTri5ssMizqsJXsnZjsi6QgMTAx7Zi4DQowMDAwMzMs7Iqk7ZS87LukLDMs6rCV7J2Y7IukIDEwMu2YuA0KMDAwMDM0LOyxheyepSw0LOqwleydmOyLpCAyMDHtmLgNCjAwMDAzNSzrqqjri4jthLAsNSzqsJXsnZjsi6QgMjAy7Zi4DQowMDAwMzYs7ZSE66aw7YSwLDYs7KCE7IKw6rCV7J2Y7IukDQowMDAwMzcs7LGF7IOBLDcs7Jq07JiB7IKs66y07IukDQowMDAwMzgs7J2Y7J6QLDgs6rCV7J2Y7IukIDEwMe2YuA0KMDAwMDM5LOuNsOyKpO2BrO2Gsey7tO2TqO2EsCw5LOqwleydmOyLpCAxMDLtmLgNCjAwMDA0MCzrhbjtirjrtoEsMTAs6rCV7J2Y7IukIDIwMe2YuA0KMDAwMDQxLOy6kOu5hOuLmywxLOqwleydmOyLpCAyMDLtmLgNCjAwMDA0MizsiqTtlLzsu6QsMizsoITsgrDqsJXsnZjsi6QNCjAwMDA0MyzssYXsnqUsMyzsmrTsmIHsgqzrrLTsi6QNCjAwMDA0NCzrqqjri4jthLAsNCzqsJXsnZjsi6QgMTAx7Zi4DQowMDAwNDUs7ZSE66aw7YSwLDUs6rCV7J2Y7IukIDEwMu2YuA0KMDAwMDQ2LOyxheyDgSw2LOqwleydmOyLpCAyMDHtmLgNCjAwMDA0NyzsnZjsnpAsNyzqsJXsnZjsi6QgMjAy7Zi4DQowMDAwNDgs642w7Iqk7YGs7Yax7Lu07ZOo7YSwLDgs7KCE7IKw6rCV7J2Y7IukDQowMDAwNDks64W47Yq467aBLDks7Jq07JiB7IKs66y07IukDQowMDAwNTAs7LqQ67mE64ubLDEwLOqwleydmOyLpCAxMDHtmLgNCjAwMDA1MSzsiqTtlLzsu6QsMSzqsJXsnZjsi6QgMTAy7Zi4DQowMDAwNTIs7LGF7J6lLDIs6rCV7J2Y7IukIDIwMe2YuA0KMDAwMDUzLOuqqOuLiO2EsCwzLOqwleydmOyLpCAyMDLtmLgNCjAwMDA1NCztlITrprDthLAsNCzsoITsgrDqsJXsnZjsi6QNCjAwMDA1NSzssYXsg4EsNSzsmrTsmIHsgqzrrLTsi6QNCjAwMDA1NizsnZjsnpAsNizqsJXsnZjsi6QgMTAx7Zi4DQowMDAwNTcs642w7Iqk7YGs7Yax7Lu07ZOo7YSwLDcs6rCV7J2Y7IukIDEwMu2YuA0KMDAwMDU4LOuFuO2KuOu2gSw4LOqwleydmOyLpCAyMDHtmLgNCjAwMDA1OSzsupDruYTri5ssOSzqsJXsnZjsi6QgMjAy7Zi4DQowMDAwNjAs7Iqk7ZS87LukLDEwLOyghOyCsOqwleydmOyLpA0KMDAwMDYxLOyxheyepSwxLOyatOyYgeyCrOustOyLpA0KMDAwMDYyLOuqqOuLiO2EsCwyLOqwleydmOyLpCAxMDHtmLgNCjAwMDA2MyztlITrprDthLAsMyzqsJXsnZjsi6QgMTAy7Zi4DQowMDAwNjQs7LGF7IOBLDQs6rCV7J2Y7IukIDIwMe2YuA0KMDAwMDY1LOydmOyekCw1LOqwleydmOyLpCAyMDLtmLgNCjAwMDA2NizrjbDsiqTtgazthrHsu7Ttk6jthLAsNizsoITsgrDqsJXsnZjsi6QNCjAwMDA2NyzrhbjtirjrtoEsNyzsmrTsmIHsgqzrrLTsi6QNCjAwMDA2OCzsupDruYTri5ssOCzqsJXsnZjsi6QgMTAx7Zi4DQowMDAwNjks7Iqk7ZS87LukLDks6rCV7J2Y7IukIDEwMu2YuA0KMDAwMDcwLOyxheyepSwxMCzqsJXsnZjsi6QgMjAx7Zi4DQowMDAwNzEs66qo64uI7YSwLDEs6rCV7J2Y7IukIDIwMu2YuA0KMDAwMDcyLO2UhOumsO2EsCwyLOyghOyCsOqwleydmOyLpA0KMDAwMDczLOyxheyDgSwzLOyatOyYgeyCrOustOyLpA0KMDAwMDc0LOydmOyekCw0LOqwleydmOyLpCAxMDHtmLgNCjAwMDA3NSzrjbDsiqTtgazthrHsu7Ttk6jthLAsNSzqsJXsnZjsi6QgMTAy7Zi4DQowMDAwNzYs64W47Yq467aBLDYs6rCV7J2Y7IukIDIwMe2YuA0KMDAwMDc3LOy6kOu5hOuLmyw3LOqwleydmOyLpCAyMDLtmLgNCjAwMDA3OCzsiqTtlLzsu6QsOCzsoITsgrDqsJXsnZjsi6QNCjAwMDA3OSzssYXsnqUsOSzsmrTsmIHsgqzrrLTsi6QNCjAwMDA4MCzrqqjri4jthLAsMTAs6rCV7J2Y7IukIDEwMe2YuA0KMDAwMDgxLO2UhOumsO2EsCwxLOqwleydmOyLpCAxMDLtmLgNCjAwMDA4MizssYXsg4EsMizqsJXsnZjsi6QgMjAx7Zi4DQowMDAwODMs7J2Y7J6QLDMs6rCV7J2Y7IukIDIwMu2YuA0KMDAwMDg0LOuNsOyKpO2BrO2Gsey7tO2TqO2EsCw0LOyghOyCsOqwleydmOyLpA0KMDAwMDg1LOuFuO2KuOu2gSw1LOyatOyYgeyCrOustOyLpA0KMDAwMDg2LOy6kOu5hOuLmyw2LOqwleydmOyLpCAxMDHtmLgNCjAwMDA4NyzsiqTtlLzsu6QsNyzqsJXsnZjsi6QgMTAy7Zi4DQowMDAwODgs7LGF7J6lLDgs6rCV7J2Y7IukIDIwMe2YuA0KMDAwMDg5LOuqqOuLiO2EsCw5LOqwleydmOyLpCAyMDLtmLgNCjAwMDA5MCztlITrprDthLAsMTAs7KCE7IKw6rCV7J2Y7IukDQowMDAwOTEs7LGF7IOBLDEs7Jq07JiB7IKs66y07IukDQowMDAwOTIs7J2Y7J6QLDIs6rCV7J2Y7IukIDEwMe2YuA0KMDAwMDkzLOuNsOyKpO2BrO2Gsey7tO2TqO2EsCwzLOqwleydmOyLpCAxMDLtmLgNCjAwMDA5NCzrhbjtirjrtoEsNCzqsJXsnZjsi6QgMjAx7Zi4DQowMDAwOTUs7LqQ67mE64ubLDUs6rCV7J2Y7IukIDIwMu2YuA0KMDAwMDk2LOyKpO2UvOy7pCw2LOyghOyCsOqwleydmOyLpA0KMDAwMDk3LOyxheyepSw3LOyatOyYgeyCrOustOyLpA0KMDAwMDk4LOuqqOuLiO2EsCw4LOqwleydmOyLpCAxMDHtmLgNCjAwMDA5OSztlITrprDthLAsOSzqsJXsnZjsi6QgMTAy7Zi4DQowMDAxMDAs7LGF7IOBLDEwLOqwleydmOyLpCAyMDHtmLgNCjAwMDEwMSzsnZjsnpAsMSzqsJXsnZjsi6QgMjAy7Zi4DQowMDAxMDIs642w7Iqk7YGs7Yax7Lu07ZOo7YSwLDIs7KCE7IKw6rCV7J2Y7IukDQowMDAxMDMs64W47Yq467aBLDMs7Jq07JiB7IKs66y07IukDQowMDAxMDQs7LqQ67mE64ubLDQs6rCV7J2Y7IukIDEwMe2YuA0KMDAwMTA1LOyKpO2UvOy7pCw1LOqwleydmOyLpCAxMDLtmLgNCjAwMDEwNizssYXsnqUsNizqsJXsnZjsi6QgMjAx7Zi4DQowMDAxMDcs66qo64uI7YSwLDcs6rCV7J2Y7IukIDIwMu2YuA0KMDAwMTA4LO2UhOumsO2EsCw4LOyghOyCsOqwleydmOyLpA0KMDAwMTA5LOyxheyDgSw5LOyatOyYgeyCrOustOyLpA0KMDAwMTEwLOydmOyekCwxMCzqsJXsnZjsi6QgMTAx7Zi4DQowMDAxMTEs642w7Iqk7YGs7Yax7Lu07ZOo7YSwLDEs6rCV7J2Y7IukIDEwMu2YuA0KMDAwMTEyLOuFuO2KuOu2gSwyLOqwleydmOyLpCAyMDHtmLgNCjAwMDExMyzsupDruYTri5ssMyzqsJXsnZjsi6QgMjAy7Zi4DQowMDAxMTQs7Iqk7ZS87LukLDQs7KCE7IKw6rCV7J2Y7IukDQowMDAxMTUs7LGF7J6lLDUs7Jq07JiB7IKs66y07IukDQowMDAxMTYs66qo64uI7YSwLDYs6rCV7J2Y7IukIDEwMe2YuA0KMDAwMTE3LO2UhOumsO2EsCw3LOqwleydmOyLpCAxMDLtmLgNCjAwMDExOCzssYXsg4EsOCzqsJXsnZjsi6QgMjAx7Zi4DQowMDAxMTks7J2Y7J6QLDks6rCV7J2Y7IukIDIwMu2YuA0KMDAwMTIwLOuNsOyKpO2BrO2Gsey7tO2TqO2EsCwxMCzsoITsgrDqsJXsnZjsi6QNCjAwMDEyMSzrhbjtirjrtoEsMSzsmrTsmIHsgqzrrLTsi6QNCjAwMDEyMizsupDruYTri5ssMizqsJXsnZjsi6QgMTAx7Zi4DQowMDAxMjMs7Iqk7ZS87LukLDMs6rCV7J2Y7IukIDEwMu2YuA0KMDAwMTI0LOyxheyepSw0LOqwleydmOyLpCAyMDHtmLgNCjAwMDEyNSzrqqjri4jthLAsNSzqsJXsnZjsi6QgMjAy7Zi4DQowMDAxMjYs7ZSE66aw7YSwLDYs7KCE7IKw6rCV7J2Y7IukDQowMDAxMjcs7LGF7IOBLDcs7Jq07JiB7IKs66y07IukDQowMDAxMjgs7J2Y7J6QLDgs6rCV7J2Y7IukIDEwMe2YuA0KMDAwMTI5LOuNsOyKpO2BrO2Gsey7tO2TqO2EsCw5LOqwleydmOyLpCAxMDLtmLgNCjAwMDEzMCzrhbjtirjrtoEsMTAs6rCV7J2Y7IukIDIwMe2YuA0KMDAwMTMxLOy6kOu5hOuLmywxLOqwleydmOyLpCAyMDLtmLgNCjAwMDEzMizsiqTtlLzsu6QsMizsoITsgrDqsJXsnZjsi6QNCjAwMDEzMyzssYXsnqUsMyzsmrTsmIHsgqzrrLTsi6QNCjAwMDEzNCzrqqjri4jthLAsNCzqsJXsnZjsi6QgMTAx7Zi4DQowMDAxMzUs7ZSE66aw7YSwLDUs6rCV7J2Y7IukIDEwMu2YuA0KMDAwMTM2LOyxheyDgSw2LOqwleydmOyLpCAyMDHtmLgNCjAwMDEzNyzsnZjsnpAsNyzqsJXsnZjsi6QgMjAy7Zi4DQowMDAxMzgs642w7Iqk7YGs7Yax7Lu07ZOo7YSwLDgs7KCE7IKw6rCV7J2Y7IukDQowMDAxMzks64W47Yq467aBLDks7Jq07JiB7IKs66y07IukDQowMDAxNDAs7LqQ67mE64ubLDEwLOqwleydmOyLpCAxMDHtmLgNCjAwMDE0MSzsiqTtlLzsu6QsMSzqsJXsnZjsi6QgMTAy7Zi4DQowMDAxNDIs7LGF7J6lLDIs6rCV7J2Y7IukIDIwMe2YuA0KMDAwMTQzLOuqqOuLiO2EsCwzLOqwleydmOyLpCAyMDLtmLgNCjAwMDE0NCztlITrprDthLAsNCzsoITsgrDqsJXsnZjsi6QNCjAwMDE0NSzssYXsg4EsNSzsmrTsmIHsgqzrrLTsi6QNCjAwMDE0NizsnZjsnpAsNizqsJXsnZjsi6QgMTAx7Zi4DQowMDAxNDcs642w7Iqk7YGs7Yax7Lu07ZOo7YSwLDcs6rCV7J2Y7IukIDEwMu2YuA0KMDAwMTQ4LOuFuO2KuOu2gSw4LOqwleydmOyLpCAyMDHtmLgNCjAwMDE0OSzsupDruYTri5ssOSzqsJXsnZjsi6QgMjAy7Zi4DQowMDAxNTAs7Iqk7ZS87LukLDEwLOyghOyCsOqwleydmOyLpA0KMDAwMTUxLOyxheyepSwxLOyatOyYgeyCrOustOyLpA0KMDAwMTUyLOuqqOuLiO2EsCwyLOqwleydmOyLpCAxMDHtmLgNCjAwMDE1MyztlITrprDthLAsMyzqsJXsnZjsi6QgMTAy7Zi4DQowMDAxNTQs7LGF7IOBLDQs6rCV7J2Y7IukIDIwMe2YuA0KMDAwMTU1LOydmOyekCw1LOqwleydmOyLpCAyMDLtmLgNCjAwMDE1NizrjbDsiqTtgazthrHsu7Ttk6jthLAsNizsoITsgrDqsJXsnZjsi6QNCjAwMDE1NyzrhbjtirjrtoEsNyzsmrTsmIHsgqzrrLTsi6QNCjAwMDE1OCzsupDruYTri5ssOCzqsJXsnZjsi6QgMTAx7Zi4DQowMDAxNTks7Iqk7ZS87LukLDks6rCV7J2Y7IukIDEwMu2YuA0KMDAwMTYwLOyxheyepSwxMCzqsJXsnZjsi6QgMjAx7Zi4DQowMDAxNjEs66qo64uI7YSwLDEs6rCV7J2Y7IukIDIwMu2YuA0KMDAwMTYyLO2UhOumsO2EsCwyLOyghOyCsOqwleydmOyLpA0KMDAwMTYzLOyxheyDgSwzLOyatOyYgeyCrOustOyLpA0KMDAwMTY0LOydmOyekCw0LOqwleydmOyLpCAxMDHtmLgNCjAwMDE2NSzrjbDsiqTtgazthrHsu7Ttk6jthLAsNSzqsJXsnZjsi6QgMTAy7Zi4DQowMDAxNjYs64W47Yq467aBLDYs6rCV7J2Y7IukIDIwMe2YuA0KMDAwMTY3LOy6kOu5hOuLmyw3LOqwleydmOyLpCAyMDLtmLgNCjAwMDE2OCzsiqTtlLzsu6QsOCzsoITsgrDqsJXsnZjsi6QNCjAwMDE2OSzssYXsnqUsOSzsmrTsmIHsgqzrrLTsi6QNCjAwMDE3MCzrqqjri4jthLAsMTAs6rCV7J2Y7IukIDEwMe2YuA0KMDAwMTcxLO2UhOumsO2EsCwxLOqwleydmOyLpCAxMDLtmLgNCjAwMDE3MizssYXsg4EsMizqsJXsnZjsi6QgMjAx7Zi4DQowMDAxNzMs7J2Y7J6QLDMs6rCV7J2Y7IukIDIwMu2YuA0KMDAwMTc0LOuNsOyKpO2BrO2Gsey7tO2TqO2EsCw0LOyghOyCsOqwleydmOyLpA0KMDAwMTc1LOuFuO2KuOu2gSw1LOyatOyYgeyCrOustOyLpA0KMDAwMTc2LOy6kOu5hOuLmyw2LOqwleydmOyLpCAxMDHtmLgNCjAwMDE3NyzsiqTtlLzsu6QsNyzqsJXsnZjsi6QgMTAy7Zi4DQowMDAxNzgs7LGF7J6lLDgs6rCV7J2Y7IukIDIwMe2YuA0KMDAwMTc5LOuqqOuLiO2EsCw5LOqwleydmOyLpCAyMDLtmLgNCjAwMDE4MCztlITrprDthLAsMTAs7KCE7IKw6rCV7J2Y7IukDQowMDAxODEs7LGF7IOBLDEs7Jq07JiB7IKs66y07IukDQowMDAxODIs7J2Y7J6QLDIs6rCV7J2Y7IukIDEwMe2YuA0KMDAwMTgzLOuNsOyKpO2BrO2Gsey7tO2TqO2EsCwzLOqwleydmOyLpCAxMDLtmLgNCjAwMDE4NCzrhbjtirjrtoEsNCzqsJXsnZjsi6QgMjAx7Zi4DQowMDAxODUs7LqQ67mE64ubLDUs6rCV7J2Y7IukIDIwMu2YuA0KMDAwMTg2LOyKpO2UvOy7pCw2LOyghOyCsOqwleydmOyLpA0KMDAwMTg3LOyxheyepSw3LOyatOyYgeyCrOustOyLpA0KMDAwMTg4LOuqqOuLiO2EsCw4LOqwleydmOyLpCAxMDHtmLgNCjAwMDE4OSztlITrprDthLAsOSzqsJXsnZjsi6QgMTAy7Zi4DQowMDAxOTAs7LGF7IOBLDEwLOqwleydmOyLpCAyMDHtmLgNCjAwMDE5MSzsnZjsnpAsMSzqsJXsnZjsi6QgMjAy7Zi4DQowMDAxOTIs642w7Iqk7YGs7Yax7Lu07ZOo7YSwLDIs7KCE7IKw6rCV7J2Y7IukDQowMDAxOTMs64W47Yq467aBLDMs7Jq07JiB7IKs66y07IukDQowMDAxOTQs7LqQ67mE64ubLDQs6rCV7J2Y7IukIDEwMe2YuA0KMDAwMTk1LOyKpO2UvOy7pCw1LOqwleydmOyLpCAxMDLtmLgNCjAwMDE5NizssYXsnqUsNizqsJXsnZjsi6QgMjAx7Zi4DQowMDAxOTcs66qo64uI7YSwLDcs6rCV7J2Y7IukIDIwMu2YuA0KMDAwMTk4LO2UhOumsO2EsCw4LOyghOyCsOqwleydmOyLpA0KMDAwMTk5LOyxheyDgSw5LOyatOyYgeyCrOustOyLpA0KMDAwMjAwLOydmOyekCwxMCzqsJXsnZjsi6QgMTAx7Zi4DQo=" download="물품대장_200개.csv">물품대장 ↓</a> / <a href="data:text/csv;charset=utf-8;base64,77u/6rSA66as67KI7Zi4LO2SiOuqhSzsiJjrn4ks67O06rSA7J6l7IaMDQowMDAwMDEs7LGF7IOBLDEs7Jq07JiB7IKs66y07IukDQowMDAwMDIs7J2Y7J6QLDIs6rCV7J2Y7IukIDEwMe2YuA0KMDAwMDAzLOuNsOyKpO2BrO2Gsey7tO2TqO2EsCwzLOqwleydmOyLpCAxMDLtmLgNCjAwMDAwNCzrhbjtirjrtoEsNCzqsJXsnZjsi6QgMjAx7Zi4DQowMDAwMDUs7LqQ67mE64ubLDUs6rCV7J2Y7IukIDIwMu2YuA0KMDAwMDA2LOyKpO2UvOy7pCw2LOyghOyCsOqwleydmOyLpA0KMDAwMDA3LOyxheyepSw3LOyatOyYgeyCrOustOyLpA0KMDAwMDA4LOuqqOuLiO2EsCw4LOqwleydmOyLpCAxMDHtmLgNCjAwMDAwOSztlITrprDthLAsOSzqsJXsnZjsi6QgMTAy7Zi4DQowMDAwMTAs7LGF7IOBLDEwLOqwleydmOyLpCAyMDHtmLgNCjAwMDAxMSzsnZjsnpAsMSzqsJXsnZjsi6QgMjAy7Zi4DQowMDAwMTIs642w7Iqk7YGs7Yax7Lu07ZOo7YSwLDIs7KCE7IKw6rCV7J2Y7IukDQowMDAwMTMs64W47Yq467aBLDMs7Jq07JiB7IKs66y07IukDQowMDAwMTQs7LqQ67mE64ubLDQs6rCV7J2Y7IukIDEwMe2YuA0KMDAwMDE1LOyKpO2UvOy7pCw1LOqwleydmOyLpCAxMDLtmLgNCjAwMDAxNizssYXsnqUsNizqsJXsnZjsi6QgMjAx7Zi4DQowMDAwMTcs66qo64uI7YSwLDcs6rCV7J2Y7IukIDIwMu2YuA0KMDAwMDE4LO2UhOumsO2EsCw4LOyghOyCsOqwleydmOyLpA0KMDAwMDE5LOyxheyDgSw5LOyatOyYgeyCrOustOyLpA0KMDAwMDIwLOydmOyekCwxMCzqsJXsnZjsi6QgMTAx7Zi4DQowMDAwMjEs642w7Iqk7YGs7Yax7Lu07ZOo7YSwLDEs6rCV7J2Y7IukIDEwMu2YuA0KMDAwMDIyLOuFuO2KuOu2gSwyLOqwleydmOyLpCAyMDHtmLgNCjAwMDAyMyzsupDruYTri5ssMyzqsJXsnZjsi6QgMjAy7Zi4DQowMDAwMjQs7Iqk7ZS87LukLDQs7KCE7IKw6rCV7J2Y7IukDQowMDAwMjUs7LGF7J6lLDUs7Jq07JiB7IKs66y07IukDQowMDAwMjYs66qo64uI7YSwLDYs6rCV7J2Y7IukIDEwMe2YuA0KMDAwMDI3LO2UhOumsO2EsCw3LOqwleydmOyLpCAxMDLtmLgNCjAwMDAyOCzssYXsg4EsOCzqsJXsnZjsi6QgMjAx7Zi4DQowMDAwMjks7J2Y7J6QLDks6rCV7J2Y7IukIDIwMu2YuA0KMDAwMDMwLOuNsOyKpO2BrO2Gsey7tO2TqO2EsCwxMCzsoITsgrDqsJXsnZjsi6QNCjAwMDAzMSzrhbjtirjrtoEsMSzsmrTsmIHsgqzrrLTsi6QNCjAwMDAzMizsupDruYTri5ssMizqsJXsnZjsi6QgMTAx7Zi4DQowMDAwMzMs7Iqk7ZS87LukLDMs6rCV7J2Y7IukIDEwMu2YuA0KMDAwMDM0LOyxheyepSw0LOqwleydmOyLpCAyMDHtmLgNCjAwMDAzNSzrqqjri4jthLAsNSzqsJXsnZjsi6QgMjAy7Zi4DQowMDAwMzYs7ZSE66aw7YSwLDYs7KCE7IKw6rCV7J2Y7IukDQowMDAwMzcs7LGF7IOBLDcs7Jq07JiB7IKs66y07IukDQowMDAwMzgs7J2Y7J6QLDgs6rCV7J2Y7IukIDEwMe2YuA0KMDAwMDM5LOuNsOyKpO2BrO2Gsey7tO2TqO2EsCw5LOqwleydmOyLpCAxMDLtmLgNCjAwMDA0MCzrhbjtirjrtoEsMTAs6rCV7J2Y7IukIDIwMe2YuA0KMDAwMDQxLOy6kOu5hOuLmywxLOqwleydmOyLpCAyMDLtmLgNCjAwMDA0MizsiqTtlLzsu6QsMizsoITsgrDqsJXsnZjsi6QNCjAwMDA0MyzssYXsnqUsMyzsmrTsmIHsgqzrrLTsi6QNCjAwMDA0NCzrqqjri4jthLAsNCzqsJXsnZjsi6QgMTAx7Zi4DQowMDAwNDUs7ZSE66aw7YSwLDUs6rCV7J2Y7IukIDEwMu2YuA0KMDAwMDQ2LOyxheyDgSw2LOqwleydmOyLpCAyMDHtmLgNCjAwMDA0NyzsnZjsnpAsNyzqsJXsnZjsi6QgMjAy7Zi4DQowMDAwNDgs642w7Iqk7YGs7Yax7Lu07ZOo7YSwLDgs7KCE7IKw6rCV7J2Y7IukDQowMDAwNDks64W47Yq467aBLDks7Jq07JiB7IKs66y07IukDQowMDAwNTAs7LqQ67mE64ubLDEwLOqwleydmOyLpCAxMDHtmLgNCjAwMDA1MSzsiqTtlLzsu6QsMSzqsJXsnZjsi6QgMTAy7Zi4DQowMDAwNTIs7LGF7J6lLDIs6rCV7J2Y7IukIDIwMe2YuA0KMDAwMDUzLOuqqOuLiO2EsCwzLOqwleydmOyLpCAyMDLtmLgNCjAwMDA1NCztlITrprDthLAsNCzsoITsgrDqsJXsnZjsi6QNCjAwMDA1NSzssYXsg4EsNSzsmrTsmIHsgqzrrLTsi6QNCjAwMDA1NizsnZjsnpAsNizqsJXsnZjsi6QgMTAx7Zi4DQowMDAwNTcs642w7Iqk7YGs7Yax7Lu07ZOo7YSwLDcs6rCV7J2Y7IukIDEwMu2YuA0KMDAwMDU4LOuFuO2KuOu2gSw4LOqwleydmOyLpCAyMDHtmLgNCjAwMDA1OSzsupDruYTri5ssOSzqsJXsnZjsi6QgMjAy7Zi4DQowMDAwNjAs7Iqk7ZS87LukLDEwLOyghOyCsOqwleydmOyLpA0KMDAwMDYxLOyxheyepSwxLOyatOyYgeyCrOustOyLpA0KMDAwMDYyLOuqqOuLiO2EsCwyLOqwleydmOyLpCAxMDHtmLgNCjAwMDA2MyztlITrprDthLAsMyzqsJXsnZjsi6QgMTAy7Zi4DQowMDAwNjQs7LGF7IOBLDQs6rCV7J2Y7IukIDIwMe2YuA0KMDAwMDY1LOydmOyekCw1LOqwleydmOyLpCAyMDLtmLgNCjAwMDA2NizrjbDsiqTtgazthrHsu7Ttk6jthLAsNizsoITsgrDqsJXsnZjsi6QNCjAwMDA2NyzrhbjtirjrtoEsNyzsmrTsmIHsgqzrrLTsi6QNCjAwMDA2OCzsupDruYTri5ssOCzqsJXsnZjsi6QgMTAx7Zi4DQowMDAwNjks7Iqk7ZS87LukLDks6rCV7J2Y7IukIDEwMu2YuA0KMDAwMDcwLOyxheyepSwxMCzqsJXsnZjsi6QgMjAx7Zi4DQowMDAwNzEs66qo64uI7YSwLDEs6rCV7J2Y7IukIDIwMu2YuA0KMDAwMDcyLO2UhOumsO2EsCwyLOyghOyCsOqwleydmOyLpA0KMDAwMDczLOyxheyDgSwzLOyatOyYgeyCrOustOyLpA0KMDAwMDc0LOydmOyekCw0LOqwleydmOyLpCAxMDHtmLgNCjAwMDA3NSzrjbDsiqTtgazthrHsu7Ttk6jthLAsNSzqsJXsnZjsi6QgMTAy7Zi4DQowMDAwNzYs64W47Yq467aBLDYs6rCV7J2Y7IukIDIwMe2YuA0KMDAwMDc3LOy6kOu5hOuLmyw3LOqwleydmOyLpCAyMDLtmLgNCjAwMDA3OCzsiqTtlLzsu6QsOCzsoITsgrDqsJXsnZjsi6QNCjAwMDA3OSzssYXsnqUsOSzsmrTsmIHsgqzrrLTsi6QNCjAwMDA4MCzrqqjri4jthLAsMTAs6rCV7J2Y7IukIDEwMe2YuA0KMDAwMDgxLO2UhOumsO2EsCwxLOqwleydmOyLpCAxMDLtmLgNCjAwMDA4MizssYXsg4EsMizqsJXsnZjsi6QgMjAx7Zi4DQowMDAwODMs7J2Y7J6QLDMs6rCV7J2Y7IukIDIwMu2YuA0KMDAwMDg0LOuNsOyKpO2BrO2Gsey7tO2TqO2EsCw0LOyghOyCsOqwleydmOyLpA0KMDAwMDg1LOuFuO2KuOu2gSw1LOyatOyYgeyCrOustOyLpA0KMDAwMDg2LOy6kOu5hOuLmyw2LOqwleydmOyLpCAxMDHtmLgNCjAwMDA4NyzsiqTtlLzsu6QsNyzqsJXsnZjsi6QgMTAy7Zi4DQowMDAwODgs7LGF7J6lLDgs6rCV7J2Y7IukIDIwMe2YuA0KMDAwMDg5LOuqqOuLiO2EsCw5LOqwleydmOyLpCAyMDLtmLgNCjAwMDA5MCztlITrprDthLAsMTAs7KCE7IKw6rCV7J2Y7IukDQowMDAwOTEs7LGF7IOBLDEs7Jq07JiB7IKs66y07IukDQowMDAwOTIs7J2Y7J6QLDIs6rCV7J2Y7IukIDEwMe2YuA0KMDAwMDkzLOuNsOyKpO2BrO2Gsey7tO2TqO2EsCwzLOqwleydmOyLpCAxMDLtmLgNCjAwMDA5NCzrhbjtirjrtoEsNCzqsJXsnZjsi6QgMjAx7Zi4DQowMDAwOTUs7LqQ67mE64ubLDUs6rCV7J2Y7IukIDIwMu2YuA0KMDAwMDk2LOyKpO2UvOy7pCw2LOyghOyCsOqwleydmOyLpA0KMDAwMDk3LOyxheyepSw3LOyatOyYgeyCrOustOyLpA0KMDAwMDk4LOuqqOuLiO2EsCw4LOqwleydmOyLpCAxMDHtmLgNCjAwMDA5OSztlITrprDthLAsOSzqsJXsnZjsi6QgMTAy7Zi4DQowMDAxMDAs7LGF7IOBLDEwLOqwleydmOyLpCAyMDHtmLgNCjAwMDEwMSzsnZjsnpAsMSzqsJXsnZjsi6QgMjAy7Zi4DQowMDAxMDIs642w7Iqk7YGs7Yax7Lu07ZOo7YSwLDIs7KCE7IKw6rCV7J2Y7IukDQowMDAxMDMs64W47Yq467aBLDMs7Jq07JiB7IKs66y07IukDQowMDAxMDQs7LqQ67mE64ubLDQs6rCV7J2Y7IukIDEwMe2YuA0KMDAwMTA1LOyKpO2UvOy7pCw1LOqwleydmOyLpCAxMDLtmLgNCjAwMDEwNizssYXsnqUsNizqsJXsnZjsi6QgMjAx7Zi4DQowMDAxMDcs66qo64uI7YSwLDcs6rCV7J2Y7IukIDIwMu2YuA0KMDAwMTA4LO2UhOumsO2EsCw4LOyghOyCsOqwleydmOyLpA0KMDAwMTA5LOyxheyDgSw5LOyatOyYgeyCrOustOyLpA0KMDAwMTEwLOydmOyekCwxMCzqsJXsnZjsi6QgMTAx7Zi4DQowMDAxMTEs642w7Iqk7YGs7Yax7Lu07ZOo7YSwLDEs6rCV7J2Y7IukIDEwMu2YuA0KMDAwMTEyLOuFuO2KuOu2gSwyLOqwleydmOyLpCAyMDHtmLgNCjAwMDExMyzsupDruYTri5ssMyzqsJXsnZjsi6QgMjAy7Zi4DQowMDAxMTQs7Iqk7ZS87LukLDQs7KCE7IKw6rCV7J2Y7IukDQowMDAxMTUs7LGF7J6lLDUs7Jq07JiB7IKs66y07IukDQowMDAxMTYs66qo64uI7YSwLDYs6rCV7J2Y7IukIDEwMe2YuA0KMDAwMTE3LO2UhOumsO2EsCw3LOqwleydmOyLpCAxMDLtmLgNCjAwMDExOCzssYXsg4EsOCzqsJXsnZjsi6QgMjAx7Zi4DQowMDAxMTks7J2Y7J6QLDks6rCV7J2Y7IukIDIwMu2YuA0KMDAwMTIwLOuNsOyKpO2BrO2Gsey7tO2TqO2EsCwxMCzsoITsgrDqsJXsnZjsi6QNCjAwMDEyMSzrhbjtirjrtoEsNCzsmrTsmIHsgqzrrLTsi6QNCjAwMDEyMizsupDruYTri5ssMSzqsJXsnZjsi6QgMTAx7Zi4DQowMDAxMjMs7Iqk7ZS87LukLDYs6rCV7J2Y7IukIDEwMu2YuA0KMDAwMTI0LOyxheyepSwzLOqwleydmOyLpCAyMDHtmLgNCjAwMDEyNSzrqqjri4jthLAsOCzqsJXsnZjsi6QgMjAy7Zi4DQowMDAxMjYs7ZSE66aw7YSwLDUs7KCE7IKw6rCV7J2Y7IukDQowMDAxMjcs7LGF7IOBLDEwLOyatOyYgeyCrOustOyLpA0KMDAwMTI4LOydmOyekCw3LOqwleydmOyLpCAxMDHtmLgNCjAwMDEyOSzrjbDsiqTtgazthrHsu7Ttk6jthLAsMTIs6rCV7J2Y7IukIDEwMu2YuA0KMDAwMTMwLOuFuO2KuOu2gSw5LOqwleydmOyLpCAyMDHtmLgNCjAwMDEzMSzsupDruYTri5ssNCzqsJXsnZjsi6QgMjAy7Zi4DQowMDAxMzIs7Iqk7ZS87LukLDEs7KCE7IKw6rCV7J2Y7IukDQowMDAxMzMs7LGF7J6lLDYs7Jq07JiB7IKs66y07IukDQowMDAxMzQs66qo64uI7YSwLDMs6rCV7J2Y7IukIDEwMe2YuA0KMDAwMTM1LO2UhOumsO2EsCw4LOqwleydmOyLpCAxMDLtmLgNCjAwMDEzNizssYXsg4EsNSzqsJXsnZjsi6QgMjAx7Zi4DQowMDAxMzcs7J2Y7J6QLDEwLOqwleydmOyLpCAyMDLtmLgNCjAwMDEzOCzrjbDsiqTtgazthrHsu7Ttk6jthLAsNyzsoITsgrDqsJXsnZjsi6QNCjAwMDEzOSzrhbjtirjrtoEsMTIs7Jq07JiB7IKs66y07IukDQowMDAxNDAs7LqQ67mE64ubLDks6rCV7J2Y7IukIDEwMe2YuA0KMDAwMTQxLOyKpO2UvOy7pCw0LOqwleydmOyLpCAxMDLtmLgNCjAwMDE0MizssYXsnqUsMSzqsJXsnZjsi6QgMjAx7Zi4DQowMDAxNDMs66qo64uI7YSwLDYs6rCV7J2Y7IukIDIwMu2YuA0KMDAwMTQ0LO2UhOumsO2EsCwzLOyghOyCsOqwleydmOyLpA0KMDAwMTQ1LOyxheyDgSw4LOyatOyYgeyCrOustOyLpA0KMDAwMTQ2LOydmOyekCw1LOqwleydmOyLpCAxMDHtmLgNCjAwMDE0NyzrjbDsiqTtgazthrHsu7Ttk6jthLAsMTAs6rCV7J2Y7IukIDEwMu2YuA0KMDAwMTQ4LOuFuO2KuOu2gSw3LOqwleydmOyLpCAyMDHtmLgNCjAwMDE0OSzsupDruYTri5ssMTIs6rCV7J2Y7IukIDIwMu2YuA0KMDAwMTUwLOyKpO2UvOy7pCw5LOyghOyCsOqwleydmOyLpA0KMDAwMTUxLOyxheyepSwxLOqwleydmOyLpCAxMDLtmLgNCjAwMDE1Mizrqqjri4jthLAsMizqsJXsnZjsi6QgMjAx7Zi4DQowMDAxNTMs7ZSE66aw7YSwLDMs6rCV7J2Y7IukIDIwMu2YuA0KMDAwMTU0LOyxheyDgSw0LOyghOyCsOqwleydmOyLpA0KMDAwMTU1LOydmOyekCw1LOyatOyYgeyCrOustOyLpA0KMDAwMTU2LOuNsOyKpO2BrO2Gsey7tO2TqO2EsCw2LOqwleydmOyLpCAxMDHtmLgNCjAwMDE1NyzrhbjtirjrtoEsNyzqsJXsnZjsi6QgMTAy7Zi4DQowMDAxNTgs7LqQ67mE64ubLDgs6rCV7J2Y7IukIDIwMe2YuA0KMDAwMTU5LOyKpO2UvOy7pCw5LOqwleydmOyLpCAyMDLtmLgNCjAwMDE2MCzssYXsnqUsMTAs7KCE7IKw6rCV7J2Y7IukDQowMDAxNjEs66qo64uI7YSwLDEs7Jq07JiB7IKs66y07IukDQowMDAxNjIs7ZSE66aw7YSwLDIs6rCV7J2Y7IukIDEwMe2YuA0KMDAwMTYzLOyxheyDgSwzLOqwleydmOyLpCAxMDLtmLgNCjAwMDE2NCzsnZjsnpAsNCzqsJXsnZjsi6QgMjAx7Zi4DQowMDAxNjUs642w7Iqk7YGs7Yax7Lu07ZOo7YSwLDUs6rCV7J2Y7IukIDIwMu2YuA0KMDAwMTY2LOuFuO2KuOu2gSw2LOyghOyCsOqwleydmOyLpA0KMDAwMTY3LOy6kOu5hOuLmyw3LOyatOyYgeyCrOustOyLpA0KMDAwMTY4LOyKpO2UvOy7pCw4LOqwleydmOyLpCAxMDHtmLgNCjAwMDE2OSzssYXsnqUsOSzqsJXsnZjsi6QgMTAy7Zi4DQowMDAxNzAs66qo64uI7YSwLDEwLOqwleydmOyLpCAyMDHtmLgNCjAwMDE3MSztlITrprDthLAsNCzqsJXsnZjsi6QgMjAy7Zi4DQowMDAxNzIs7LGF7IOBLDUs7KCE7IKw6rCV7J2Y7IukDQowMDAxNzMs7J2Y7J6QLDYs7Jq07JiB7IKs66y07IukDQowMDAxNzQs642w7Iqk7YGs7Yax7Lu07ZOo7YSwLDcs6rCV7J2Y7IukIDEwMe2YuA0KMDAwMTc1LOuFuO2KuOu2gSw4LOqwleydmOyLpCAxMDLtmLgNCjAwMDE3NizsupDruYTri5ssOSzqsJXsnZjsi6QgMjAx7Zi4DQowMDAxNzcs7Iqk7ZS87LukLDEwLOqwleydmOyLpCAyMDLtmLgNCjAwMDE3OCzssYXsnqUsMTEs7KCE7IKw6rCV7J2Y7IukDQowMDAxNzks66qo64uI7YSwLDEyLOyatOyYgeyCrOustOyLpA0KMDAwMTgwLO2UhOumsO2EsCwxMyzqsJXsnZjsi6QgMTAx7Zi4DQowMDAxODEs7J2Y7J6QLDEs7Jq07JiB7IKs66y07IukDQowMDAxODIs642w7Iqk7YGs7Yax7Lu07ZOo7YSwLDIs6rCV7J2Y7IukIDEwMe2YuA0KMDAwMTgzLOuFuO2KuOu2gSwzLOqwleydmOyLpCAxMDLtmLgNCjAwMDE4NCzsupDruYTri5ssNCzqsJXsnZjsi6QgMjAx7Zi4DQowMDAxODUs7Iqk7ZS87LukLDUs6rCV7J2Y7IukIDIwMu2YuA0KMDAwMTg2LOyxheyepSw2LOyghOyCsOqwleydmOyLpA0KMDAwMTg3LOuqqOuLiO2EsCw3LOyatOyYgeyCrOustOyLpA0KMDAwMTg4LO2UhOumsO2EsCw4LOqwleydmOyLpCAxMDHtmLgNCjAwMDE4OSzssYXsg4EsOSzqsJXsnZjsi6QgMTAy7Zi4DQowMDAxOTAs7J2Y7J6QLDEwLOqwleydmOyLpCAyMDHtmLgNCjAwMDIwMSzrjbDsiqTtgazthrHsu7Ttk6jthLAsMSzqsJXsnZjsi6QgMTAy7Zi4DQowMDAyMDIs64W47Yq467aBLDIs6rCV7J2Y7IukIDIwMe2YuA0KMDAwMjAzLOy6kOu5hOuLmywzLOqwleydmOyLpCAyMDLtmLgNCjAwMDIwNCzsiqTtlLzsu6QsNCzsoITsgrDqsJXsnZjsi6QNCjAwMDIwNSzssYXsnqUsNSzsmrTsmIHsgqzrrLTsi6QNCjAwMDIwNizrqqjri4jthLAsNizqsJXsnZjsi6QgMTAx7Zi4DQowMDAyMDcs7ZSE66aw7YSwLDcs6rCV7J2Y7IukIDEwMu2YuA0KMDAwMjA4LOyxheyDgSw4LOqwleydmOyLpCAyMDHtmLgNCjAwMDIwOSzsnZjsnpAsOSzqsJXsnZjsi6QgMjAy7Zi4DQowMDAyMTAs642w7Iqk7YGs7Yax7Lu07ZOo7YSwLDEwLOyghOyCsOqwleydmOyLpA0K" download="재물조사표_200개.csv">재물조사표 ↓</a> · 예상: 일치 120건, 불일치 90건</div>
+      <div id="message" class="message" role="alert" hidden></div>
+    </section>
+    <section id="results" class="results" hidden>
+      <div class="section-heading"><span class="step">02</span><div><h2>대조 결과</h2><p id="resultSummary" aria-live="polite"></p></div></div>
+      <div class="metrics"><div class="metric"><span>물품대장 행</span><strong id="ledgerCount"></strong></div><div class="metric"><span>재물조사표 행</span><strong id="surveyCount"></strong></div><div class="metric"><span>정상 일치</span><strong id="matchedCount"></strong></div><div class="metric highlighted"><span>불일치 물품</span><strong id="differenceCount"></strong></div><div class="metric"><span>검토 필요 항목</span><strong id="issueCount"></strong></div></div>
+      <div id="warning" class="warning" hidden></div>
+      <section class="panel"><div class="panel-head"><div><h3>일치 목록</h3><p>관리번호·품명·수량·보관장소가 일치하는 물품입니다.</p></div><button id="matchedDownload" type="button" class="outline-button">일치 CSV ↓</button></div><div class="table-scroll"><table><thead><tr><th>관리번호</th><th>품명</th><th>대장 수량</th><th>조사 수량</th><th>보관장소</th></tr></thead><tbody id="matchedRows"></tbody></table></div><p id="emptyMatched" class="empty-result" hidden>일치하는 물품이 없습니다.</p></section>
+      <section class="panel"><div class="panel-head"><div><h3>불일치 목록</h3><p>한 물품에 여러 차이가 있으면 함께 표시합니다.</p></div><button id="differenceDownload" type="button" class="outline-button">불일치 CSV ↓</button></div><div class="table-scroll"><table><thead><tr><th>관리번호</th><th>차이 유형</th><th>대장 품명</th><th>대장 수량</th><th>대장 장소</th><th>조사 품명</th><th>조사 수량</th><th>조사 장소</th></tr></thead><tbody id="differenceRows"></tbody></table></div><p id="emptyDifference" class="empty-result" hidden>불일치 물품이 없습니다.</p></section>
+      <section class="panel"><div class="panel-head"><div><h3>대장 기준 수량·장소 조정 안내</h3><p id="adjustmentSummary"></p></div><button id="actionDownload" type="button" class="outline-button">조정 안내 CSV ↓</button></div><p class="sample-note">조사값이 현재 확인값, 대장값이 목표 기준입니다. 아래는 물품 이동·수량 확인을 위한 제안이며 실제 조치 완료를 뜻하지 않습니다. 부족 물품을 만들어 넣거나 초과 물품을 폐기하라는 지시가 아닙니다. 대장 자체의 오류 가능성도 확인하세요.</p><div class="table-scroll"><table><thead><tr><th>관리번호</th><th>품명 (조사 / 대장)</th><th>현재 조사 수량</th><th>대장 목표 수량</th><th>현재 조사 위치</th><th>대장 목표 위치</th><th>필요 조치</th></tr></thead><tbody id="actionRows"></tbody></table></div><div class="panel-head"><p>원본을 보존한 별도 정리안입니다. 원본 수량·위치와 상태를 함께 저장하며, 품명 불일치·미등록 항목은 유지하고 대장에만 있는 행은 만들지 않습니다. 기존 일치·불일치·취합 표는 조사 원본 기준입니다.</p><button id="draftDownload" type="button" class="outline-button">대장 기준 정리안 CSV ↓</button></div></section>
+      <section id="issues" class="panel" hidden><div class="panel-head"><div><h3>검토 필요 항목</h3><p>잘못된 행 및 해당 관리번호는 확정 비교에서 제외됩니다.</p></div></div><div class="table-scroll"><table><thead><tr><th>자료</th><th>원본 행</th><th>관리번호</th><th>확인 사항</th></tr></thead><tbody id="issueRows"></tbody></table></div></section>
+      <section class="panel"><div class="panel-head"><div><h3>품명별 중복 취합</h3><p>같은 품명의 수량을 자료별로 합산합니다. 대장과 조사표를 서로 더하지 않습니다.</p></div><button id="groupDownload" type="button" class="outline-button">취합 CSV ↓</button></div><div class="panel-head"><label><input id="duplicateOnly" type="checkbox" checked> 어느 한 자료에서 같은 품명이 2행 이상인 항목만 보기</label></div><p class="sample-note">품명은 앞뒤 공백만 제거하고 정확히 같은 이름끼리 묶습니다. 다른 품명은 자동 통합하지 않습니다. 검토 필요 행이 있으면 취합·다운로드를 보류합니다. 수량 합계는 단위가 같은지 확인한 후 사용하세요.</p><div class="table-scroll"><table><thead><tr><th>품명</th><th>대장 행 수</th><th>대장 수량 합계</th><th>조사 행 수</th><th>조사 수량 합계</th><th>수량 차이 (조사−대장)</th></tr></thead><tbody id="groupRows"></tbody></table></div><p id="groupEmpty" class="empty-result" hidden></p><p id="totals" class="sample-note"></p></section>
+    </section>
+  </main><footer>단일 파일 통합판 · 샘플 포함 · 인터넷 불필요 · CSV만 지원</footer>
+</div>
+
+<script>/* 브라우저와 Electron의 렌더러에서 공통으로 사용하는 순수 계산 로직. */
+(function (global) {
+  'use strict';
+
+  const FIELDS = ['관리번호', '품명', '수량', '보관장소'];
+  const OUTPUT = [
+    '관리번호', '차이 유형', '대장 품명', '대장 수량', '대장 보관장소',
+    '조사표 품명', '조사표 수량', '조사표 보관장소'
+  ];
+
+  function parseCSV(text) {
+    if (typeof text !== 'string') throw new Error('파일을 텍스트로 읽을 수 없습니다.');
+    text = text.replace(/^\uFEFF/, '');
+    const rows = [];
+    let row = [];
+    let field = '';
+    let state = 'start';
+    let line = 1;
+    let rowLine = 1;
+
+    function complete() {
+      row.push(field);
+      if (row.some((part) => part.trim() !== '')) rows.push({ cells: row, line: rowLine });
+      row = [];
+      field = '';
+      state = 'start';
+      rowLine = line;
+    }
+
+    for (let i = 0; i < text.length; i++) {
+      const ch = text[i];
+      if (state === 'quoted') {
+        if (ch === '"') {
+          if (text[i + 1] === '"') { field += '"'; i++; }
+          else state = 'afterQuote';
+        } else if (ch === '\r' || ch === '\n') {
+          if (ch === '\r' && text[i + 1] === '\n') i++;
+          field += '\n';
+          line++;
+        } else field += ch;
+        continue;
+      }
+      if (ch === ',') {
+        row.push(field);
+        field = '';
+        state = 'start';
+      } else if (ch === '\r' || ch === '\n') {
+        if (ch === '\r' && text[i + 1] === '\n') i++;
+        line++;
+        complete();
+      } else if (ch === '"') {
+        if (state !== 'start') throw new Error(`${line}행: 따옴표 위치가 잘못되었습니다.`);
+        state = 'quoted';
+      } else if (state === 'afterQuote') {
+        if (ch !== ' ' && ch !== '\t') throw new Error(`${line}행: 닫는 따옴표 뒤의 문자가 잘못되었습니다.`);
+      } else {
+        field += ch;
+        state = 'plain';
+      }
+    }
+    if (state === 'quoted') throw new Error(`${rowLine}행: 닫히지 않은 따옴표가 있습니다.`);
+    if (row.length || field !== '' || state === 'afterQuote') complete();
+    if (!rows.length) throw new Error('빈 파일입니다. 제목 행과 자료 행을 확인하세요.');
+    return rows;
+  }
+
+  function quantity(value) {
+    const clean = value.trim();
+    if (!/^\d+(?:\.\d+)?$/.test(clean)) return null;
+    const number = Number(clean);
+    if (!Number.isFinite(number)) return null;
+    // 지수 표기·부동소수 오차 없이 0을 정리한 십진 표기끼리 비교한다.
+    const [whole, fraction = ''] = clean.split('.');
+    return `${whole.replace(/^0+(?=\d)/, '')}.${fraction.replace(/0+$/, '')}`;
+  }
+
+  function prepare(text, label) {
+    const parsed = parseCSV(text);
+    const headers = parsed[0].cells.map((cell) => cell.trim().replace(/^\uFEFF/, ''));
+    const missing = FIELDS.filter((field) => !headers.includes(field));
+    if (missing.length) throw new Error(`${label}: 필수 열이 없습니다: ${missing.join(', ')}. 필요한 열: ${FIELDS.join(', ')}`);
+    const repeated = FIELDS.filter((field) => headers.filter((header) => header === field).length > 1);
+    if (repeated.length) throw new Error(`${label}: 같은 제목 열이 중복되었습니다: ${repeated.join(', ')}`);
+    if (parsed.length < 2) throw new Error(`${label}: 자료 행이 없습니다.`);
+
+    const rows = [];
+    const issues = [];
+    const blocked = new Set();
+    const byId = new Map();
+
+    for (const entry of parsed.slice(1)) {
+      if (entry.cells.length !== headers.length) {
+        issues.push({ file: label, line: entry.line, id: '', reason: `열 수가 다릅니다 (제목 ${headers.length}칸, 자료 ${entry.cells.length}칸)` });
+        continue;
+      }
+      const item = { line: entry.line, originalId: entry.cells[headers.indexOf('관리번호')] };
+      for (const key of FIELDS) item[key] = entry.cells[headers.indexOf(key)].trim();
+      rows.push(item);
+      const id = item['관리번호'];
+      if (!id) {
+        issues.push({ file: label, line: entry.line, id: '', reason: '관리번호가 비어 있습니다' });
+        continue;
+      }
+      if (!byId.has(id)) byId.set(id, []);
+      byId.get(id).push(item);
+      const normalized = quantity(item['수량']);
+      if (normalized === null) {
+        blocked.add(id);
+        issues.push({ file: label, line: entry.line, id, reason: '수량이 비어 있거나 올바른 0 이상의 숫자가 아닙니다' });
+      } else item.normalizedQuantity = normalized;
+    }
+
+    for (const [id, items] of byId) {
+      if (items.length <= 1) continue;
+      blocked.add(id);
+      for (const item of items) {
+        issues.push({ file: label, line: item.line, id, reason: `관리번호 ${id}가 이 파일 안에서 중복됩니다` });
+      }
+    }
+    return { rows, byId, blocked, issues, total: parsed.length - 1 };
+  }
+
+  function compare(ledgerText, surveyText) {
+    const ledger = prepare(ledgerText, '물품대장');
+    const survey = prepare(surveyText, '재물조사표');
+    const blocked = new Set([...ledger.blocked, ...survey.blocked]);
+    const issues = [...ledger.issues, ...survey.issues];
+    const differences = [];
+    let matched = 0;
+    for (const id of new Set([...ledger.byId.keys(), ...survey.byId.keys()])) {
+      if (blocked.has(id)) continue;
+      const left = ledger.byId.get(id)?.[0] || null;
+      const right = survey.byId.get(id)?.[0] || null;
+      const types = [];
+      if (!right) types.push('대장에만 있음');
+      else if (!left) types.push('조사표에만 있음');
+      else {
+        if (left['품명'] !== right['품명']) types.push('품명 차이');
+        if (left.normalizedQuantity !== right.normalizedQuantity) types.push('수량 차이');
+        if (left['보관장소'] !== right['보관장소']) types.push('보관장소 차이');
+      }
+      if (types.length) differences.push({ id, types, ledger: left, survey: right });
+      else matched++;
+    }
+    // 열 수가 맞지 않는 행에는 관리번호가 있을 수 있으므로 대조 내보내기를 막는다.
+    return {
+      differences, issues, matched,
+      counts: { ledger: ledger.total, survey: survey.total, differences: differences.length, issues: issues.length },
+      exportable: issues.length === 0
+    };
+  }
+
+  function csvCell(value) {
+    let text = String(value ?? '');
+    // 스프레드시트에서 열 때 사용자 입력값이 수식으로 실행되지 않게 막는다.
+    if (/^[\s\u0000-\u001f]*[=+\-@]/.test(text)) text = `'${text}`;
+    return `"${text.replace(/"/g, '""')}"`;
+  }
+
+  function exportCSV(result) {
+    if (!result.exportable) throw new Error('검토 필요 행이 있습니다. 원본을 수정한 뒤 다시 비교하세요.');
+    const rows = [OUTPUT];
+    for (const item of result.differences) {
+      const left = item.ledger;
+      const right = item.survey;
+      rows.push([
+        item.id, item.types.join('; '), left?.['품명'], left?.['수량'], left?.['보관장소'],
+        right?.['품명'], right?.['수량'], right?.['보관장소']
+      ]);
+    }
+    return '\uFEFF' + rows.map((row) => row.map(csvCell).join(',')).join('\r\n') + '\r\n';
+  }
+
+  global.InventoryCore = Object.freeze({ parseCSV, prepare, compare, exportCSV });
+})(typeof window !== 'undefined' ? window : globalThis);
+</script>
+<script>/* 원본은 보존하고 대장 기준의 현장 조정 안내 및 검토용 정리안만 만든다. */
+(function (global) {
+  'use strict';
+  function build(left, right, result) {
+    if (!result.exportable) return { actions: [], draft: [] };
+    const actions = result.differences.map(({ id, ledger: a, survey: b }) => {
+      let instruction;
+      let eligible = false;
+      if (!a) instruction = '대장 미등록: 취득·이동 이력 확인 후 등록 여부 결정. 임의 삭제 금지.';
+      else if (!b) instruction = `현물 재확인: 대장상 ${a['보관장소']}에서 ${a['수량']}개 확인 필요. 조사 결과 임의 생성 금지.`;
+      else if (a['품명'] !== b['품명']) instruction = '품명 불일치: 동일 물품인지 먼저 확인. 수량·장소 정리 보류.';
+      else {
+        eligible = true;
+        const steps = [];
+        const delta = Number(a['수량']) - Number(b['수량']);
+        if (delta > 0) steps.push(`대장 대비 ${delta}개 부족: 재계수·소재 확인 후 ${a['수량']}개 확보 여부 확인`);
+        if (delta < 0) steps.push(`대장 대비 ${Math.abs(delta)}개 초과: 소속·이동 이력 확인 후 ${a['수량']}개로 정리 가능 여부 확인`);
+        if (a['보관장소'] !== b['보관장소']) steps.push(`현 위치 '${b['보관장소']}' → 대장 위치 '${a['보관장소']}' 이동 검토`);
+        steps.push('실물·승인 확인 후 담당자가 조사 기록 정리');
+        instruction = steps.join(' / ');
+      }
+      return { id, a, b, eligible, instruction };
+    });
+    const byId = new Map(actions.map((item) => [item.id, item]));
+    const draft = right.rows.map((row) => {
+      const action = byId.get(row['관리번호']);
+      const proposed = action?.eligible;
+      const target = proposed ? action.a : row;
+      return [row['관리번호'], row['품명'], target['수량'], target['보관장소'], row['수량'], row['보관장소'], proposed ? '대장 기준 제안·현장 확인 전' : action ? '확인 보류·원본 유지' : '원본 일치 유지'];
+    });
+    return { actions, draft };
+  }
+  global.InventoryAdjustment = Object.freeze({ build });
+})(typeof window !== 'undefined' ? window : globalThis);
+</script>
+<script>(function () {
+  'use strict';
+  const $ = (id) => document.getElementById(id);
+  let result = null;
+  let matches = [];
+  let groups = [];
+  let adjustment = { actions: [], draft: [] };
+  let generation = 0;
+  const buttons = ['matchedDownload', 'differenceDownload', 'groupDownload', 'actionDownload', 'draftDownload'];
+  const actionHeaders = ['관리번호', '품명(조사 / 대장)', '현재 조사 수량', '대장 목표 수량', '현재 조사 위치', '대장 목표 위치', '필요 조치'];
+  const actionValues = (item) => [item.id, `${item.b?.['품명'] || '—'} / ${item.a?.['품명'] || '—'}`, item.b?.['수량'], item.a?.['수량'], item.b?.['보관장소'], item.a?.['보관장소'], item.instruction];
+  const number = (n) => n.toLocaleString('ko-KR', { maximumFractionDigits: 10 });
+
+  function reset() {
+    generation++;
+    result = null;
+    matches = [];
+    groups = [];
+    adjustment = { actions: [], draft: [] };
+    $('results').hidden = true;
+    $('message').hidden = true;
+    buttons.forEach((id) => { $(id).disabled = true; });
+  }
+  function rows(id, data) {
+    const body = $(id);
+    body.replaceChildren();
+    for (const values of data) {
+      const row = document.createElement('tr');
+      for (const value of values) {
+        const td = document.createElement('td');
+        td.textContent = value === undefined || value === '' ? '—' : String(value);
+        row.appendChild(td);
+      }
+      body.appendChild(row);
+    }
+  }
+  function visibleGroups() {
+    return groups.filter((g) => !$('duplicateOnly').checked || g.leftRows > 1 || g.rightRows > 1);
+  }
+  function groupValues(g) {
+    return [g.name || '(품명 미기재)', g.leftRows, g.leftQuantity, g.rightRows, g.rightQuantity, g.rightQuantity - g.leftQuantity];
+  }
+  function renderGroups() {
+    rows('groupRows', visibleGroups().map((g) => groupValues(g).map((value) => typeof value === 'number' ? number(value) : value)));
+    $('groupEmpty').hidden = visibleGroups().length > 0;
+    $('groupEmpty').textContent = result?.exportable ? '이 조건에 해당하는 품명이 없습니다.' : '입력 오류를 수정한 후 품명별 취합을 확인하세요.';
+  }
+  function collectGroups(left, right) {
+    const map = new Map();
+    for (const [side, data] of [['left', left], ['right', right]]) {
+      for (const item of data.rows) {
+        const name = item['품명'];
+        if (!map.has(name)) map.set(name, { name, leftRows: 0, leftQuantity: 0, rightRows: 0, rightQuantity: 0 });
+        const group = map.get(name);
+        group[`${side}Rows`]++;
+        group[`${side}Quantity`] += Number(item['수량']);
+      }
+    }
+    return [...map.values()].sort((a, b) => a.name.localeCompare(b.name, 'ko'));
+  }
+  function render() {
+    $('results').hidden = false;
+    for (const [id, count] of Object.entries({ ledgerCount: result.counts.ledger, surveyCount: result.counts.survey, matchedCount: matches.length, differenceCount: result.differences.length, issueCount: result.issues.length })) $(id).textContent = number(count);
+    $('resultSummary').textContent = result.exportable ? '위에서부터 일치·불일치 목록과 품명별 취합을 확인하세요.' : '부분 비교 결과입니다. 오류 수정 전에는 취합 및 내보내기를 할 수 없습니다.';
+    rows('matchedRows', matches.map(({ ledger: a, survey: b }) => [a['관리번호'], a['품명'], a['수량'], b['수량'], a['보관장소']]));
+    rows('differenceRows', result.differences.map(({ id, types, ledger: a, survey: b }) => [id, types.join(' / '), a?.['품명'], a?.['수량'], a?.['보관장소'], b?.['품명'], b?.['수량'], b?.['보관장소']]));
+    $('emptyMatched').hidden = matches.length > 0;
+    $('emptyDifference').hidden = result.differences.length > 0;
+    rows('issueRows', result.issues.map((item) => [item.file, item.line, item.id, item.reason]));
+    $('issues').hidden = !result.issues.length;
+    $('warning').hidden = result.exportable;
+    $('warning').textContent = '검토 필요 항목이 있습니다. 부분 결과는 참고용이며, 오류를 수정하고 다시 비교해야 품명 취합 및 CSV 저장이 가능합니다.';
+    buttons.forEach((id) => { $(id).disabled = !result.exportable; });
+    const leftTotal = groups.reduce((sum, g) => sum + g.leftQuantity, 0);
+    const rightTotal = groups.reduce((sum, g) => sum + g.rightQuantity, 0);
+    $('totals').textContent = result.exportable ? `전체 수량 합계 (필터와 무관): 대장 ${number(leftTotal)} / 조사표 ${number(rightTotal)} / 차이 ${number(rightTotal - leftTotal)} · 품명이 바뀐 물품은 각각 다른 그룹에 포함됩니다.` : '입력 오류로 전체 수량 합계도 보류합니다.';
+    renderGroups();
+    rows('actionRows', adjustment.actions.map(actionValues));
+    const eligibleCount = adjustment.actions.filter((item) => item.eligible).length;
+    $('adjustmentSummary').textContent = result.exportable ? `수량·장소 조정 제안 ${eligibleCount}건 / 동일 물품 확인·현물 확인 보류 ${adjustment.actions.length - eligibleCount}건. 원본은 변경하지 않습니다.` : '입력 오류를 먼저 수정하세요. 조정안 생성은 보류됩니다.';
+  }
+  async function read(file, encoding) {
+    if (!file.name.toLowerCase().endsWith('.csv')) throw new Error(`${file.name}: CSV 파일만 지원합니다.`);
+    if (file.size > 20 * 1024 * 1024) throw new Error(`${file.name}: 20MB 이하 파일을 선택하세요.`);
+    try { return new TextDecoder(encoding, { fatal: true }).decode(await file.arrayBuffer()); }
+    catch { throw new Error(`${file.name}: 파일을 읽을 수 없습니다. 인코딩을 확인하세요.`); }
+  }
+  function exportTable(filename, data) {
+    if (!result?.exportable) return;
+    const escape = (value) => {
+      let text = String(value ?? '');
+      if (/^[\s\u0000-\u001f]*[=+\-@]/.test(text)) text = `'${text}`;
+      return `"${text.replace(/"/g, '""')}"`;
+    };
+    download(filename, '\uFEFF' + data.map((row) => row.map(escape).join(',')).join('\r\n'));
+  }
+  function download(filename, text) {
+    const url = URL.createObjectURL(new Blob([text], { type: 'text/csv;charset=utf-8' }));
+    const a = document.createElement('a');
+    a.href = url; a.download = filename;
+    document.body.appendChild(a); a.click(); a.remove();
+    setTimeout(() => URL.revokeObjectURL(url), 60000);
+  }
+  for (const side of ['ledger', 'survey']) {
+    $(`${side}File`).addEventListener('change', () => {
+      $(`${side}Name`).textContent = $(`${side}File`).files[0]?.name || 'CSV 파일을 선택하세요';
+      reset();
+    });
+  }
+  $('encoding').addEventListener('change', reset);
+  $('duplicateOnly').addEventListener('change', renderGroups);
+  $('clearButton').addEventListener('click', () => {
+    for (const side of ['ledger', 'survey']) { $(`${side}File`).value = ''; $(`${side}Name`).textContent = 'CSV 파일을 선택하세요'; }
+    $('encoding').value = 'utf-8';
+    reset();
+  });
+  $('compareButton').addEventListener('click', async () => {
+    reset();
+    const token = generation;
+    $('compareButton').disabled = true;
+    try {
+      const files = [$('ledgerFile').files[0], $('surveyFile').files[0]];
+      if (files.some((file) => !file)) throw new Error('두 CSV 파일을 각각 선택하세요.');
+      const [a, b] = await Promise.all(files.map((file) => read(file, $('encoding').value)));
+      if (token !== generation) return;
+      result = InventoryCore.compare(a, b);
+      const left = InventoryCore.prepare(a, files[0].name);
+      const right = InventoryCore.prepare(b, files[1].name);
+      const blocked = new Set([...left.blocked, ...right.blocked]);
+      const different = new Set(result.differences.map((item) => item.id));
+      matches = [];
+      for (const [id, entries] of left.byId) {
+        if (!blocked.has(id) && !different.has(id) && right.byId.has(id)) matches.push({ ledger: entries[0], survey: right.byId.get(id)[0] });
+      }
+      groups = result.exportable ? collectGroups(left, right) : [];
+      adjustment = InventoryAdjustment.build(left, right, result);
+      render();
+    } catch (error) {
+      if (token === generation) { $('message').textContent = error.message; $('message').hidden = false; }
+    } finally { $('compareButton').disabled = false; }
+  });
+  $('matchedDownload').addEventListener('click', () => exportTable('물품대조_일치목록.csv', [['관리번호', '품명', '대장 수량', '조사 수량', '보관장소'], ...matches.map(({ ledger: a, survey: b }) => [a['관리번호'], a['품명'], a['수량'], b['수량'], a['보관장소']])]));
+  $('differenceDownload').addEventListener('click', () => { if (result?.exportable) download('물품대조_불일치목록.csv', InventoryCore.exportCSV(result)); });
+  $('groupDownload').addEventListener('click', () => exportTable('물품대조_품명별취합.csv', [['품명', '대장 행 수', '대장 수량 합계', '조사 행 수', '조사 수량 합계', '수량 차이(조사-대장)'], ...visibleGroups().map(groupValues)]));
+  $('actionDownload').addEventListener('click', () => exportTable('물품대조_현장조정안내.csv', [actionHeaders, ...adjustment.actions.map(actionValues)]));
+  $('draftDownload').addEventListener('click', () => exportTable('재물조사표_대장기준정리안_미확인.csv', [['관리번호', '품명', '수량', '보관장소', '원본 조사 수량', '원본 조사 위치', '검토 상태'], ...adjustment.draft]));
+})();
+</script>
+</body>
+</html>

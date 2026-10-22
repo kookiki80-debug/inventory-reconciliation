@@ -1,0 +1,10 @@
+# Do not upload real inventory data or office documents.
+*.csv
+*.xlsx
+*.xls
+*.docx
+*.pdf
+.env*
+.vercel/
+node_modules/
+*.log
